@@ -2,41 +2,41 @@ version: '3'
 
 services:
 
-  frontend:
-    build:
-      context: ${FRONTEND_PATH}
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-    networks:
-      - trascendence
-    volumes:
-      - "frontend-data:/app/data"
+#  frontend:
+#    build:
+#      context: ${FRONTEND_PATH}
+#      dockerfile: Dockerfile
+#    ports:
+#      - "80:80"
+#    networks:
+#      - transcendence
+#    volumes:
+#      - "frontend-data:/app/data"
 
   backend:
     build:
-      context: ${BACKEND_PATH}
+      context: ./backend/pong-backend/
       dockerfile: Dockerfile
+      target: development
     ports:
-      - "8000:8000"
+      - "3000:3000"
     networks:
-      - trascendence
-    depends_on:
-      - db
+      - transcendence
+#    depends_on:
+#      - db
     volumes:
       - "./backend/srcs:/app/data"
-
-  db:
-    image: postgres:12
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-    networks:
-      - trascendence
+#  db:
+#    image: postgres:12
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      - POSTGRES_USER=${POSTGRES_USER}
+#      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+#      - POSTGRES_DB=${POSTGRES_DB}
+#    networks:
+#      - transcendence
 
 networks:
-  trascendence:
-    name: trascendence
+  transcendence:
+    name: transcendence
