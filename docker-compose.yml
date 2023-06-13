@@ -1,32 +1,33 @@
-version: '3'
+version: '3.7'
 
 services:
 
-  frontend:
+   backend:
+     build:
+       context: ${BACKEND_PATH}
+       dockerfile: Dockerfile
+       target: development
+     ports:
+       - "8000:8000"
+     networks:
+       - transcendence
+     depends_on:
+       - db
+     volumes:
+        - "./backend/volume:/app/data"
+
+   frontend:
     build:
       context: ${FRONTEND_PATH}
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "3000:3000"
     networks:
-      - trascendence
+      - transcendence
     volumes:
-      - "frontend-data:/app/data"
+       - "./frontend/volume:/app/data"
 
-  backend:
-    build:
-      context: ${BACKEND_PATH}
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    networks:
-      - trascendence
-    depends_on:
-      - db
-    volumes:
-      - "./backend/srcs:/app/data"
-
-  db:
+   db:
     image: postgres:12
     ports:
       - "5432:5432"
@@ -35,8 +36,10 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
     networks:
-      - trascendence
+      - transcendence
+    volumes:
+      - "./db/data:/var/lib/postgresql/data"
 
 networks:
-  trascendence:
-    name: trascendence
+  transcendence:
+    name: transcendence
