@@ -2,29 +2,29 @@ version: '3'
 
 services:
 
+  # backend:
+  #   build:
+  #     context: ${BACKEND_PATH}
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8000:8000"
+  #   networks:
+  #     - trascendence
+  #   depends_on:
+  #     - db
+  #   # volumes:
+  #   #   - "./backend/src:/app/data"
+
   frontend:
     build:
       context: ${FRONTEND_PATH}
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "3000:3000"
     networks:
       - trascendence
-    volumes:
-      - "frontend-data:/app/data"
-
-  backend:
-    build:
-      context: ${BACKEND_PATH}
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    networks:
-      - trascendence
-    depends_on:
-      - db
-    volumes:
-      - "./backend/srcs:/app/data"
+    # volumes:
+    #   - "./frontend/src:/app/data"
 
   db:
     image: postgres:12
