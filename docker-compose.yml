@@ -2,40 +2,43 @@ version: '3.7'
 
 services:
 
-#  frontend:
-#    build:
-#      context: ${FRONTEND_PATH}
-#      dockerfile: Dockerfile
-#    ports:
-#      - "80:80"
-#    networks:
-#      - transcendence
-#    volumes:
-#      - "frontend-data:/app/data"
+   backend:
+     build:
+       context: ${BACKEND_PATH}
+       dockerfile: Dockerfile
+       target: development
+     ports:
+       - "8000:8000"
+     networks:
+       - transcendence
+     depends_on:
+       - db
+     volumes:
+        - "./backend/volume:/app/data"
 
-  backend:
+   frontend:
     build:
-      context: ./backend/pong-backend/
-      dockerfile: backend/Dockerfile
-      target: development
+      context: ${FRONTEND_PATH}
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     networks:
       - transcendence
-#    depends_on:
-#      - db
     volumes:
-      - "./backend/srcs:/app/data"
-#  db:
-#    image: postgres:12
-#    ports:
-#      - "5432:5432"
-#    environment:
-#      - POSTGRES_USER=${POSTGRES_USER}
-#      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-#      - POSTGRES_DB=${POSTGRES_DB}
-#    networks:
-#      - transcendence
+       - "./frontend/volume:/app/data"
+
+   db:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    networks:
+      - transcendence
+    volumes:
+      - "./db/data:/var/lib/postgresql/data"
 
 networks:
   transcendence:
