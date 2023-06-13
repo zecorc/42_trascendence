@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 services:
 
@@ -16,7 +16,7 @@ services:
   backend:
     build:
       context: ./backend/pong-backend/
-      dockerfile: Dockerfile
+      dockerfile: backend/Dockerfile
       target: development
     ports:
       - "3000:3000"
