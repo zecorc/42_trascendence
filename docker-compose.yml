@@ -7,10 +7,10 @@ services:
        context: ${BACKEND_PATH}
        dockerfile: Dockerfile
        target: development
+     env_file:
+       - backend/.env
      ports:
        - "8000:8000"
-     networks:
-       - transcendence
      depends_on:
        - db
      volumes:
@@ -22,24 +22,20 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    networks:
-      - transcendence
     volumes:
        - "./frontend/volume:/app/data"
 
    db:
-    image: postgres:12
+    image: postgres:latest
+    restart: always
     ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-    networks:
-      - transcendence
-    volumes:
-      - "./db/data:/var/lib/postgresql/data"
+      - "127.0.0.1:5432:5432"
+    env_file:
+      - .env
 
-networks:
-  transcendence:
-    name: transcendence
+   adminer:
+     image: adminer
+     restart: always
+     ports:
+       - "8080:8080"
+
