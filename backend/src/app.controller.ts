@@ -1,12 +1,33 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from "@nestjs/common";
+import { CreateUserDto } from "src/users/dtos/CreateUser.dto";
+import { UsersService } from "src/users/services/users/users.service";
 
-@Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+@Controller("users")
+export class UsersController {
+  constructor(private readonly userService: UsersService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getUsers() {
+    return this.userService.getUsers();
+  }
+
+  @Get("id/:id")
+  findUsersById(@Param("id", ParseIntPipe) id: number) {
+    return this.userService.findUsersById(id);
+  }
+
+  @Post("create")
+  @UsePipes(ValidationPipe)
+  createUsers(@Body() createUserDto: CreateUserDto) {
+    return this.userService.createUser(createUserDto);
   }
 }
