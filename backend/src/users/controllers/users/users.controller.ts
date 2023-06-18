@@ -10,7 +10,6 @@ import {
 } from "@nestjs/common";
 import { CreateUserDto } from "src/users/dtos/CreateUser.dto";
 import { UsersService } from "src/users/services/users/users.service";
-import { ApiBody } from "@nestjs/swagger";
 
 @Controller("users")
 export class UsersController {
