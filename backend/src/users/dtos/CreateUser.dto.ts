@@ -1,5 +1,7 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
+import { Match } from "@/typeorm/match.entity";
+import { Status } from "@/enums/status.enum";
 
 export class CreateUserDto {
   @IsNotEmpty()
