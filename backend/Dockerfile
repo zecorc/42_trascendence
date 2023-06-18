@@ -1,10 +1,10 @@
 FROM node:18.16.0-alpine3.18 AS development
 WORKDIR /app
 COPY package*.json /app/
-RUN npm i --force
+RUN npm i --legacy-peer-deps
 COPY . .
-EXPOSE 3000
-CMD [ "npm", "run", "start:dev" ]
+EXPOSE 8000
+CMD [ "npm", "run", "start" ]
 
 
 FROM node:18.16.0-alpine3.18 as build
