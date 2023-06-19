@@ -1,13 +1,17 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { User } from "src/typeorm";
+import {Match, Picture, User} from "src/typeorm";
 import { Repository } from "typeorm";
 import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
+import {PictureService} from "@/users/services/pictures/pictures.service";
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>
+      private readonly pictureService: PictureService,
+
+      @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(Match)  private readonly matchRepository: Repository<Match>,
   ) {}
 
   createUser(createUserDto: CreateUserDto) {
@@ -19,9 +23,38 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  findUsersById(id: number) {
-    return this.userRepository.findOneBy({
-      id: id,
+  getUser(id: number, relations = [] as string[]): Promise<User>  {
+    return this.userRepository.findOne({
+      where: {
+        id,
+      },
+      relations: relations,
     });
   }
+
+  async getPicture(userId: number): Promise<Picture> {
+    const user: User = await this.getUser(userId, ['picture']);
+
+    return user.picture;
+  }
+
+  async setPicture(userId: number, file: Express.Multer.File): Promise<void> {
+    const name = file.originalname;
+    const data = file.buffer;
+    const user: User = await this.getUser(userId, ['picture']);
+
+    await this.pictureService.createPicture(name, data, user);
+    if (user.picture) await this.pictureService.deletePicture(user.picture.id);
+  }
+
+  async getMatches(userId: number): Promise<Match[]> {
+    const user = await this.getUser(userId, ['won', 'lost']);
+
+    let matches = [];
+    if (user.won) matches = matches.concat(user.won);
+    if (user.lost) matches = matches.concat(user.lost);
+
+    return matches;
+  }
+
 }
