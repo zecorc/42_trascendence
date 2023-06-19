@@ -1,6 +1,7 @@
 // pages/login.js (o login.tsx)
 
 import { Button, Card, TextInput } from '@mantine/core';
+import { Component } from 'react';
 
 export default function Login() {
   return (
@@ -9,10 +10,10 @@ export default function Login() {
         <h1 className="login-title">Login</h1>
         <TextInput label="Email" placeholder="Enter your email" />
         <TextInput label="Password" type="password" placeholder="Enter your password" />
-        <Button size="lg">Login</Button>
-        <Button size="lg" variant="light">
+        <center><Button size="lg">Login</Button></center>
+        <center><Button size="lg" variant="light">
           Register
-        </Button>
+        </Button></center>
       </Card>
     </div>
   );
