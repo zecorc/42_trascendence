@@ -2,10 +2,8 @@ import {
     HttpException,
     HttpStatus,
     Injectable,
-    StreamableFile,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Readable } from 'stream';
 import { Repository } from 'typeorm';
 import {Picture, User} from "@/typeorm";
 

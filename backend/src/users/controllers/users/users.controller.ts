@@ -15,7 +15,7 @@ import {CreateUserDto} from "@/users/dtos/CreateUser.dto";
 import {PictureService} from "@/users/services/pictures/pictures.service";
 
 
-@Controller("users")
+@Controller("user")
 export class UsersController {
   constructor(
       private readonly userService: UsersService,
@@ -23,13 +23,13 @@ export class UsersController {
 
   ) {}
 
-  @Get()
+  @Get("/all")
   getUsers() {
     return this.userService.getUsers();
   }
 
   @Get("/:id")
-  findUsersById(@Param("id", ParseIntPipe) id: number) {
+  getUser(@Param("id", ParseIntPipe) id: number) {
     return this.userService.getUser(id);
   }
 
@@ -51,4 +51,5 @@ export class UsersController {
   createUsers(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
   }
+
 }

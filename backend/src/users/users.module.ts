@@ -4,10 +4,10 @@ import { UsersService } from "./services/users/users.service";
 import { PictureService} from "./services/pictures/pictures.service";
 
 import { TypeOrmModule } from "@nestjs/typeorm";
-import {Match, Picture, User} from "src/typeorm";
+import {Friendship, Match, Picture, User} from "src/typeorm";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Match, Picture])],
+  imports: [TypeOrmModule.forFeature([User, Match, Picture, Friendship])],
   controllers: [UsersController],
   providers: [UsersService, PictureService],
 })

@@ -1,9 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import {HttpException, HttpStatus, Injectable} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import {Match, Picture, User} from "src/typeorm";
 import { Repository } from "typeorm";
 import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
 import {PictureService} from "@/users/services/pictures/pictures.service";
+import {UserStatus} from "@/enums/status.enum";
 
 @Injectable()
 export class UsersService {
@@ -17,6 +18,13 @@ export class UsersService {
   createUser(createUserDto: CreateUserDto) {
     const newUser = this.userRepository.create(createUserDto);
     return this.userRepository.save(newUser);
+  }
+
+
+  async createMatch(match: Match): Promise<void> {
+    const newMatch: Match = this.matchRepository.create(match);
+    await this.matchRepository.save(newMatch);
+
   }
 
   getUsers() {
@@ -55,6 +63,14 @@ export class UsersService {
     if (user.lost) matches = matches.concat(user.lost);
 
     return matches;
+  }
+  async setStatus(userId: number, status: UserStatus): Promise<void> {
+    const user = await this.getUser(userId);
+
+    if (user.status == status) return;
+
+    await this.userRepository.update(user.id, { status });
+
   }
 
 }

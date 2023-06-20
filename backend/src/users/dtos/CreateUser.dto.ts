@@ -1,8 +1,6 @@
 import {IsEmail, IsEnum, IsNotEmpty, MinLength, Validator, ValidatorConstraint} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { Match } from "@/typeorm/match.entity";
-import { Status } from "@/enums/status.enum";
-import {Picture} from "@/typeorm";
+import { UserStatus } from "@/enums/status.enum";
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -25,7 +23,7 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(Status)
-  status: Status;
+  @IsEnum(UserStatus)
+  status: UserStatus;
 
 }

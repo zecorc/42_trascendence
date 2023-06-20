@@ -1,5 +1,5 @@
 import {Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
-import { Status } from "@/enums/status.enum";
+import { UserStatus } from "@/enums/status.enum";
 import { Match } from "@/typeorm/match.entity";
 import {Picture} from "@/typeorm/picture.entity";
 import {ApiProperty} from "@nestjs/swagger";
@@ -33,8 +33,8 @@ export class User {
   password: string;
 
   @ApiProperty()
-  @Column({ default: Status.OFFLINE })
-  status: Status;
+  @Column({ default: UserStatus.OFFLINE })
+  status: UserStatus;
 
   @ApiProperty()
   @Column()
