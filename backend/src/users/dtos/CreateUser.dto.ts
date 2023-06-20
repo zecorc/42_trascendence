@@ -1,5 +1,5 @@
-import {IsEmail, IsEnum, IsNotEmpty, MinLength, Validator, ValidatorConstraint} from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsEnum, IsNotEmpty, MinLength } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 import { UserStatus } from "@/enums/status.enum";
 
 export class CreateUserDto {
@@ -25,5 +25,4 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsEnum(UserStatus)
   status: UserStatus;
-
 }

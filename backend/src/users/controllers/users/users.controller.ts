@@ -4,23 +4,22 @@ import {
   Get,
   Param,
   ParseIntPipe,
-  Post, Res, StreamableFile,
+  Post,
+  StreamableFile,
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
 import { UsersService } from "src/users/services/users/users.service";
-import {Match, User} from "@/typeorm";
-import { Readable } from 'stream';
-import {CreateUserDto} from "@/users/dtos/CreateUser.dto";
-import {PictureService} from "@/users/services/pictures/pictures.service";
-
+import { Match } from "@/typeorm";
+import { Readable } from "stream";
+import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
+import { PictureService } from "@/users/services/pictures/pictures.service";
 
 @Controller("user")
 export class UsersController {
   constructor(
-      private readonly userService: UsersService,
-      private readonly pictureService: PictureService
-
+    private readonly userService: UsersService,
+    private readonly pictureService: PictureService
   ) {}
 
   @Get("/all")
@@ -34,16 +33,16 @@ export class UsersController {
   }
 
   //TODO use @Res ?
-  @Get('/:id/picture')
+  @Get("/:id/picture")
   async getPicture(
-      @Param('id', ParseIntPipe) id: number,
+    @Param("id", ParseIntPipe) id: number
   ): Promise<StreamableFile> {
     const picture = await this.userService.getPicture(id);
     return new StreamableFile(Readable.from(picture.data));
   }
 
-  @Get('/:id/matches')
-  getMatches(@Param('id', ParseIntPipe) userid: number): Promise<Match[]> {
+  @Get("/:id/matches")
+  getMatches(@Param("id", ParseIntPipe) userid: number): Promise<Match[]> {
     return this.userService.getMatches(userid);
   }
   @Post("create")
@@ -51,5 +50,4 @@ export class UsersController {
   createUsers(@Body() createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
   }
-
 }

@@ -1,8 +1,14 @@
-import {Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { UserStatus } from "@/enums/status.enum";
 import { Match } from "@/typeorm/match.entity";
-import {Picture} from "@/typeorm/picture.entity";
-import {ApiProperty} from "@nestjs/swagger";
+import { Picture } from "@/typeorm/picture.entity";
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
 export class User {

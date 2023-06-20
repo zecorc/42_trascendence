@@ -1,18 +1,18 @@
-import {HttpException, HttpStatus, Injectable} from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import {Match, Picture, User} from "src/typeorm";
+import { Match, Picture, User } from "src/typeorm";
 import { Repository } from "typeorm";
 import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
-import {PictureService} from "@/users/services/pictures/pictures.service";
-import {UserStatus} from "@/enums/status.enum";
+import { PictureService } from "@/users/services/pictures/pictures.service";
+import { UserStatus } from "@/enums/status.enum";
 
 @Injectable()
 export class UsersService {
   constructor(
-      private readonly pictureService: PictureService,
+    private readonly pictureService: PictureService,
 
-      @InjectRepository(User) private readonly userRepository: Repository<User>,
-    @InjectRepository(Match)  private readonly matchRepository: Repository<Match>,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(Match) private readonly matchRepository: Repository<Match>
   ) {}
 
   createUser(createUserDto: CreateUserDto) {
@@ -20,18 +20,16 @@ export class UsersService {
     return this.userRepository.save(newUser);
   }
 
-
   async createMatch(match: Match): Promise<void> {
     const newMatch: Match = this.matchRepository.create(match);
     await this.matchRepository.save(newMatch);
-
   }
 
   getUsers() {
     return this.userRepository.find();
   }
 
-  getUser(id: number, relations = [] as string[]): Promise<User>  {
+  getUser(id: number, relations = [] as string[]): Promise<User> {
     return this.userRepository.findOne({
       where: {
         id,
@@ -41,7 +39,7 @@ export class UsersService {
   }
 
   async getPicture(userId: number): Promise<Picture> {
-    const user: User = await this.getUser(userId, ['picture']);
+    const user: User = await this.getUser(userId, ["picture"]);
 
     return user.picture;
   }
@@ -49,14 +47,14 @@ export class UsersService {
   async setPicture(userId: number, file: Express.Multer.File): Promise<void> {
     const name = file.originalname;
     const data = file.buffer;
-    const user: User = await this.getUser(userId, ['picture']);
+    const user: User = await this.getUser(userId, ["picture"]);
 
     await this.pictureService.createPicture(name, data, user);
     if (user.picture) await this.pictureService.deletePicture(user.picture.id);
   }
 
   async getMatches(userId: number): Promise<Match[]> {
-    const user = await this.getUser(userId, ['won', 'lost']);
+    const user = await this.getUser(userId, ["won", "lost"]);
 
     let matches = [];
     if (user.won) matches = matches.concat(user.won);
@@ -70,7 +68,5 @@ export class UsersService {
     if (user.status == status) return;
 
     await this.userRepository.update(user.id, { status });
-
   }
-
 }

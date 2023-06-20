@@ -6,7 +6,7 @@ import {
   JoinColumn,
 } from "typeorm";
 import { User } from "./user.entity";
-import {ApiProperty} from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
 export class Match {
