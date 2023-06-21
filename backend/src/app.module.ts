@@ -3,6 +3,7 @@ import { UsersModule } from "./users/users.module";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import entities from "./typeorm";
+import { ChatModule } from "@/chats/chat.module";
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import entities from "./typeorm";
       inject: [ConfigService],
     }),
     UsersModule,
+    ChatModule,
   ],
   controllers: [],
   providers: [],
