@@ -5,9 +5,10 @@ import Link from 'next/link';
 export default function Homepage()
 {
     return(
-        <div><h1> Home page</h1>
+        <div>
+          <h1>HOME</h1>
         <Link href="/pong">
-          <button>Play PONGhete</button>
+          <button>GO TO /PONG</button>
       </Link>
       </div>
 
