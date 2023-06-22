@@ -38,6 +38,16 @@ export class UsersService {
     });
   }
 
+  // function to get user by email
+  getUserByEmail(email: string, relations = [] as string[]): Promise<User> {
+    return this.userRepository.findOne({
+      where: {
+        email,
+      },
+      relations: relations,
+    });
+  }
+
   async getPicture(userId: number): Promise<Picture> {
     const user: User = await this.getUser(userId, ["picture"]);
 
