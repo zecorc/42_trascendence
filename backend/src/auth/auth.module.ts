@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 
 @Module({
@@ -9,7 +8,7 @@ import { AuthController } from './auth.controller';
       envFilePath: '.env.development', // Specify the path to your .env.development file
     }),
   ],
-  providers: [AuthService],
+  providers: [],
   controllers: [AuthController],
 })
 export class AuthModule {}
