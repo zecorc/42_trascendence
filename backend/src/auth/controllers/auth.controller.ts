@@ -1,15 +1,15 @@
 import { Controller, Get, Redirect, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ConfigService } from '@nestjs/config';
-import { UsersService } from '../users/services/users/users.service';
+import { UserService } from '../../users/services/users/user.service';
 import { CreateUserDto } from '@/users/dtos/CreateUser.dto';
-import { AuthService } from './auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly configService: ConfigService,
-    private readonly usersService: UsersService,
+    private readonly usersService: UserService,
     private readonly authService: AuthService,
   ) {}
 
@@ -22,7 +22,7 @@ export class AuthController {
   @Get('callback')
   async handleCallback(@Req() request: Request, @Res() response: Response) {
     
-    const authorizationCode = request.query.code;
+    const authorizationCode: any = request.query.code;
 
     const access_token = request.cookies.access_token;
     const isTokenValid = await this.authService.validateAccessToken(access_token);
@@ -49,7 +49,7 @@ export class AuthController {
       );
       const { access_token, expires_in, token_type } = tokenResponse.data;
   
-      response.cookie('access_token', access_token, { expires: 0, httpOnly: true });
+      response.cookie('access_token', access_token, { expires: new Date(0), httpOnly: true });
   
       try {
         const userResponse = await this.authService.getUserInfo(access_token);

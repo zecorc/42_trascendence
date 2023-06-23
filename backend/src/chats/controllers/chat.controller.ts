@@ -3,11 +3,11 @@ import {
   Controller,
   Get,
   Param,
-  ParseIntPipe,
   Post,
   Req,
 } from "@nestjs/common";
 import { Chat, User } from "@/typeorm";
+import {ChatService} from "@/chats/services/chat.service";
 
 @Controller("chat")
 export class ChatController {

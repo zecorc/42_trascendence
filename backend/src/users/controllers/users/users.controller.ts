@@ -9,7 +9,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common";
-import { UsersService } from "src/users/services/users/users.service";
+import { UserService } from "@/users/services/users/user.service";
 import { Match } from "@/typeorm";
 import { Readable } from "stream";
 import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
@@ -18,7 +18,7 @@ import { PictureService } from "@/users/services/pictures/pictures.service";
 @Controller("user")
 export class UsersController {
   constructor(
-    private readonly userService: UsersService,
+    private readonly userService: UserService,
     private readonly pictureService: PictureService
   ) {}
 

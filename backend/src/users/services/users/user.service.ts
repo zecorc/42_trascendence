@@ -7,7 +7,7 @@ import { PictureService } from "@/users/services/pictures/pictures.service";
 import { UserStatus } from "@/enums/status.enum";
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     private readonly pictureService: PictureService,
 
