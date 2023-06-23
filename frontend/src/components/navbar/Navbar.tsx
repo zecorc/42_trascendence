@@ -1,38 +1,56 @@
-import pong from '@/app/pong/page'
-import Link from 'next/link'
-import React from 'react'
+"use client";
+
+import pong from "@/app/pong/page";
+import Link from "next/link";
+import React from "react";
+import styles from "./navbar.module.css";
 
 const links: { id: number; title: string; url: string }[] = [
   {
     id: 0,
-    title: "home",
+    title: "HOME",
     url: "./home",
   },
   {
     id: 1,
-    title: "pong",
+    title: "PONG",
     url: "./pong",
   },
   {
     id: 2,
-    title: "chat",
+    title: "CHAT",
     url: "./chat",
   },
   {
     id: 3,
-    title: "leaderboard",
+    title: "LEADERBOARD",
     url: "./leaderboard",
   },
 ];
 
 const Navbar = () => {
   return (
-    <div>
-        {links.map(link=>
-          <Link key={link.id} href={link.url}>{link.title}</Link>)             
-        }      
-    </div>
-  )
-}
+    <div className={styles.container}>
+      <Link href="/" className={styles.logo}>
+        USER
+      </Link>
+      <div className={styles.links}>
+        </div>
+        {links.map((link) => (
+          <Link className={styles.link} key={link.id} href={link.url}>
+            {link.title}
+          </Link>
+        ))}
+      <button
+        className={styles.logout}
+        onClick={() => {
+          console.log("logged out");
+        }}
+        >
+        Log out
+      </button>
+        </div>
+  );
+};
 
-export default Navbar
+export default Navbar;

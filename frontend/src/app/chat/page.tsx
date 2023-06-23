@@ -1,8 +1,9 @@
 import React from 'react'
+import styles from './page.module.css'
 
 const chat = () => {
   return (
-    <div>chat</div>
+    <div className={styles.container}>CHAT</div>
   )
 }
 

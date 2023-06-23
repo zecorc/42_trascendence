@@ -1,8 +1,9 @@
 import React from 'react'
+import styles from './page.module.css'
 
 const leaderboard = () => {
   return (
-    <div>leaderboard
+    <div className={styles.container}>leaderboard
     </div>
   )
 }
