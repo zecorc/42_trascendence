@@ -15,7 +15,7 @@ export class UserService {
     @InjectRepository(Match) private readonly matchRepository: Repository<Match>
   ) {}
 
-  createUser(createUserDto: CreateUserDto) {
+  create(createUserDto: CreateUserDto) {
     const newUser = this.userRepository.create(createUserDto);
     return this.userRepository.save(newUser);
   }

@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 export class User {
   @ApiProperty()
   @PrimaryGeneratedColumn({
-    type: "bigint",
+    type: "bigint"
   })
   id: number;
 
@@ -24,6 +24,13 @@ export class User {
     nullable: false,
   })
   username: string;
+
+  @ApiProperty()
+  @Column({
+    unique: true,
+    nullable: true,
+  })
+  oauthToken: string;
 
   @ApiProperty()
   @Column({
@@ -46,12 +53,15 @@ export class User {
   @Column()
   rank: number;
 
+  @ApiProperty()
   @OneToMany(() => Match, (match) => match.winner)
   won: Match[];
 
+  @ApiProperty()
   @OneToMany(() => Match, (match) => match.loser)
   lost: Match[];
 
+  @ApiProperty()
   @OneToOne(() => Picture, (picture) => picture.user)
   picture: Picture;
 }

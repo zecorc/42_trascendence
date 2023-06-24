@@ -1,13 +1,13 @@
 import { Module } from "@nestjs/common";
-import { UsersModule } from "./users/users.module";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import entities from "./typeorm";
-import { ChatModule } from "@/chats/chat.module";
 import {AuthModule} from "@/auth/auth.module";
+import {PassportModule} from "@nestjs/passport";
 
 @Module({
   imports: [
+    PassportModule.register({ session: true }),
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -23,8 +23,7 @@ import {AuthModule} from "@/auth/auth.module";
       }),
       inject: [ConfigService],
     }),
-    UsersModule,
-  ],
+    AuthModule],
   controllers: [],
   providers: [],
 })
