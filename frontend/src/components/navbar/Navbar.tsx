@@ -1,6 +1,5 @@
 "use client";
 
-import pong from "@/app/pong/page";
 import Link from "next/link";
 import React from "react";
 import styles from "./navbar.module.css";

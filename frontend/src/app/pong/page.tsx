@@ -1,10 +1,9 @@
-import React from 'react'
+import Image from "next/image";
 import styles from './page.module.css'
 
-const pong = () => {
-  return (
-    <div className={styles.container}>pong</div>
-  )
+export default function Login()
+{
+    return(
+        <div>pong</div>
+    )
 }
-
-export default pong
