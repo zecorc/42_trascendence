@@ -65,14 +65,16 @@ export class AuthController {
           return response.redirect("/dashboard"); // ??
         } else {
           const createUserDto: CreateUserDto = {
+            oauthToken: "",
+            picture: undefined,
             email: user.email,
             username: user.login,
             password: "",
             rank: 0,
-            status: 0,
+            status: 0
           };
 
-          const createdUser = await this.usersService.createUser(createUserDto);
+          const createdUser = await this.usersService.create(createUserDto);
           return response.redirect("/dashboard"); // ??
         }
       } catch (error) {
