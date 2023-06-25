@@ -1,0 +1,41 @@
+.container {
+    margin: auto;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.button {
+    font-size: 150%;
+    width: 250px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a55a3;
+    color: aqua;
+    cursor: grab;
+    border-radius: 42px;
+    /* margin-bottom: ; */
+}
+
+.button:hover {
+    background-color: rgb(0, 0, 0);
+    color: rgb(229, 24, 24);
+}
+
+.item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.title {
+    background: linear-gradient(to bottom, #f03939, #43cf31);
+    font-size: 72px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
