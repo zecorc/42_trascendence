@@ -4,7 +4,7 @@ import { Match, Picture, User } from "src/typeorm";
 import { Repository } from "typeorm";
 import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
 import { PictureService } from "@/users/services/pictures/pictures.service";
-import { UserStatus } from "@/enums/status.enum";
+import { UserStatus } from "@/types/enums/status.enum";
 
 @Injectable()
 export class UserService {

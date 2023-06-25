@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 import { User } from "./user.entity";
 import { ApiProperty } from "@nestjs/swagger";
+import { Message } from "@/typeorm/message.entity";
 
 @Entity()
 export class Picture {
@@ -22,7 +23,7 @@ export class Picture {
   @Column({ type: "bytea" })
   data: Buffer;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => User })
   @ManyToOne(() => User, { onDelete: "CASCADE" })
   @JoinColumn()
   user: User;

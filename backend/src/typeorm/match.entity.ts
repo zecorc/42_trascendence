@@ -18,12 +18,12 @@ export class Match {
   @Column("int", { array: true, default: [] })
   score: number[];
 
-  @ApiProperty()
+  @ApiProperty({ type: () => User })
   @ManyToOne(() => User, { eager: true, onDelete: "CASCADE" })
   @JoinColumn()
   winner: User;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => User })
   @ManyToOne(() => User, { eager: true, onDelete: "CASCADE" })
   @JoinColumn()
   loser: User;

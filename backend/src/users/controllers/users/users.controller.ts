@@ -10,7 +10,7 @@ import {
   ValidationPipe,
 } from "@nestjs/common";
 import { UserService } from "@/users/services/users/user.service";
-import {Match, User} from "@/typeorm";
+import { Match, User } from "@/typeorm";
 import { Readable } from "stream";
 import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
 import { PictureService } from "@/users/services/pictures/pictures.service";

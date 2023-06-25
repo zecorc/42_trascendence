@@ -5,7 +5,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { UserStatus } from "@/enums/status.enum";
+import { UserStatus } from "@/types/enums/status.enum";
 import { Match } from "@/typeorm/match.entity";
 import { Picture } from "@/typeorm/picture.entity";
 import { ApiProperty } from "@nestjs/swagger";
@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 export class User {
   @ApiProperty()
   @PrimaryGeneratedColumn({
-    type: "bigint"
+    type: "bigint",
   })
   id: number;
 

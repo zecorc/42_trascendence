@@ -2,15 +2,17 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   JoinTable,
-  ManyToMany, Column, ManyToOne, JoinColumn,
+  ManyToMany,
+  Column,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
 import { User } from "@/typeorm/user.entity";
 import { Message } from "@/typeorm/message.entity";
-import {ApiProperty} from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
 export class Chat {
-
   @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
@@ -24,7 +26,7 @@ export class Chat {
   @JoinTable()
   members: User[];
 
-  @ApiProperty()
+  @ApiProperty({ type: () => Message })
   @ManyToMany(() => Message)
   @JoinTable()
   messages: Message[];
@@ -37,8 +39,13 @@ export class Chat {
   @Column({ nullable: true })
   password: string;
 
-  @ApiProperty()
-  @ManyToOne(() => User, { onDelete: 'CASCADE', eager: true })
+  @ApiProperty({ type: () => User })
+  @ManyToOne(() => User, { onDelete: "CASCADE", eager: true })
   @JoinColumn()
   owner: User;
+
+  @ApiProperty({ type: () => User })
+  @ManyToMany(() => User, { onDelete: "CASCADE", eager: true })
+  @JoinTable()
+  admin: User[];
 }

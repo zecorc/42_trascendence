@@ -7,7 +7,7 @@ import {
 } from "typeorm";
 import { User } from "./user.entity";
 import { ApiProperty } from "@nestjs/swagger";
-import { FriendshipStatus } from "@/enums/status.enum";
+import { FriendshipStatus } from "@/types/enums/status.enum";
 
 @Entity()
 export class Friendship {
@@ -19,12 +19,12 @@ export class Friendship {
   @Column()
   status: FriendshipStatus;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => User })
   @ManyToOne(() => User, { eager: true, onDelete: "CASCADE" })
   @JoinColumn()
   me: User;
 
-  @ApiProperty()
+  @ApiProperty({ type: () => User })
   @ManyToOne(() => User, { eager: true, onDelete: "CASCADE" })
   @JoinColumn()
   other: User;

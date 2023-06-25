@@ -5,13 +5,12 @@ import { PictureService } from "./services/pictures/pictures.service";
 
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Friendship, Match, Picture, User } from "src/typeorm";
-import {ChatModule} from "@/chats/chat.module";
+import { ChatModule } from "@/chats/chat.module";
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Match, Picture, Friendship])],
   controllers: [UsersController],
   providers: [UserService, PictureService],
   exports: [UserService],
-
 })
 export class UsersModule {}
