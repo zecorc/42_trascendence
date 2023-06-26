@@ -5,6 +5,7 @@ import entities from "./typeorm";
 import { PassportModule } from "@nestjs/passport";
 import { ChatModule } from "@/chats/chat.module";
 import { UsersModule } from "@/users/users.module";
+import { AuthModule } from "@/auth/auth.module";
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UsersModule } from "@/users/users.module";
     }),
     UsersModule,
     ChatModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

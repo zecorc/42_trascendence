@@ -5,19 +5,19 @@ import { AuthController } from "./controllers/auth.controller";
 import { UsersModule } from "@/users/users.module";
 import { HttpModule } from "@nestjs/axios";
 import { PassportModule } from "@nestjs/passport";
+import { JwtAuthGuard } from './auth.guard';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: ".env.development", // Specify the path to your .env.development file
+      envFilePath: ".env.development",
     }),
     HttpModule,
     PassportModule,
-    // ConfigModule,
     UsersModule,
   ],
-  providers: [AuthService],
-  exports: [AuthService],
+  providers: [AuthService, JwtAuthGuard], // Include JwtAuthGuard here
+  exports: [AuthService, JwtAuthGuard], // Include JwtAuthGuard here
   controllers: [AuthController],
 })
 export class AuthModule {}

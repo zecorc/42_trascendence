@@ -14,6 +14,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle("Transcendence")
     .setVersion("0.1")
+    .addApiKey({type: 'apiKey', name: 'Api-Key', in: 'header'}, 'Api-Key')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

@@ -5,7 +5,7 @@ import { UserService } from "../../users/services/users/user.service";
 import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
 import { AuthService } from "../services/auth.service";
 
-@Controller("auth")
+@Controller("")
 export class AuthController {
   constructor(
     private readonly configService: ConfigService,
@@ -65,7 +65,7 @@ export class AuthController {
           return response.redirect("/dashboard"); // ??
         } else {
           const createUserDto: CreateUserDto = {
-            oauthToken: "",
+            oauthToken: access_token  ,
             picture: undefined,
             email: user.email,
             username: user.login,
