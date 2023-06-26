@@ -3,6 +3,8 @@
 import Link from "next/link";
 import React from "react";
 import styles from "./navbar.module.css";
+import { Button } from "@mantine/core";
+
 
 const links: { id: number; title: string; url: string }[] = [
   {
@@ -30,25 +32,27 @@ const links: { id: number; title: string; url: string }[] = [
 const Navbar = () => {
   return (
     <div className={styles.container}>
+      <div className={styles.profile}>
       <Link href="/" className={styles.logo}>
-        USER
+        PROFILE
       </Link>
+      </div>
       <div className={styles.links}>
-        </div>
         {links.map((link) => (
           <Link className={styles.link} key={link.id} href={link.url}>
             {link.title}
           </Link>
         ))}
-      <button
-        className={styles.logout}
-        onClick={() => {
-          console.log("logged out");
-        }}
+        <Button
+          className={styles.logout}
+          onClick={() => {
+            console.log("logged out");
+          }}
         >
-        Log out
-      </button>
-        </div>
+          Log out
+        </Button>
+      </div>
+    </div>
   );
 };
 
