@@ -4,6 +4,7 @@ import { ConfigService } from "@nestjs/config";
 import { UserService } from "../../users/services/users/user.service";
 import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
 import { AuthService } from "../services/auth.service";
+import { Public } from '../public.decorator';
 
 @Controller("")
 export class AuthController {
@@ -13,6 +14,7 @@ export class AuthController {
     private readonly authService: AuthService
   ) {}
 
+  @Public() 
   @Get("login")
   @Redirect(
     "https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-b98e607513499274306cbad301d8f128ca766c93ff76ec8a049c9a5c0b1acc6a&redirect_uri=https%3A%2F%2F127.0.0.1&response_type=code"

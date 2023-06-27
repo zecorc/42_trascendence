@@ -15,8 +15,9 @@ import { Match, User } from "@/typeorm";
 import { Readable } from "stream";
 import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
 import { PictureService } from "@/users/services/pictures/pictures.service";
-import { JwtAuthGuard } from './../../../auth/auth.guard';
+import { AuthGuard42 } from './../../../auth/auth.guard';
 import {ApiSecurity} from '@nestjs/swagger'
+import { Public } from '../../../auth/public.decorator';
 
 
 
@@ -27,6 +28,7 @@ export class UsersController {
     private readonly pictureService: PictureService
   ) {}
 
+  @Public()
   @Get("/all")
   @ApiSecurity('Api-Key')
   getUsers() {
@@ -41,7 +43,7 @@ export class UsersController {
 
   //TODO use @Res ?
   @Get("/:id/picture")
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthGuard42)
   async getPicture(
     @Param("id", ParseIntPipe) id: number
   ): Promise<StreamableFile> {
@@ -74,5 +76,11 @@ export class UsersController {
   setUserName(@Param("id", ParseIntPipe) id: number, @Param("userName", ParseIntPipe) userName: string)
   {
     this.userService.setUserName(id, userName);
-  } 
+  }
+
+  @Public()
+  @Get("/:id/token")
+  getToken(@Param("id", ParseIntPipe) id: number): Promise<any> {
+    return this.userService.getToken(id);
+  }
 }

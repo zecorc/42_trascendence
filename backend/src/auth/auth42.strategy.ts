@@ -6,11 +6,13 @@ import { stringify } from "querystring";
 import { ConfigService } from "@nestjs/config";
 import { UserService } from "@/users/services/users/user.service";
 import { CreateUserDto } from "@/users/dtos/CreateUser.dto";
+import { AuthService } from "@/auth/services/auth.service";
 
 @Injectable()
 export class Auth42Strategy extends PassportStrategy(Strategy, "auth42") {
   constructor(
     private readonly configService: ConfigService,
+    private readonly authService: AuthService,
     private readonly userService: UserService,
     private readonly http: HttpService
   ) {
@@ -36,19 +38,15 @@ export class Auth42Strategy extends PassportStrategy(Strategy, "auth42") {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .toPromise();
-    const user = await this.userService.getUserByEmail(data.email);
-    if (!user) {
-      const newUser: CreateUserDto = {
-        rank: 0,
-        status: 0,
-        email: data.email,
-        username: data.name,
-        oauthToken: accessToken,
-        password: "password",
-        picture: data.image_url,
-      };
-      return this.userService.create(newUser);
-    }
-    return user;
+
+      const isValid = await this.authService.validateAccessToken(accessToken);
+
+      if (!isValid) {
+        // Token is invalid or expired
+        return null;
+      }
+  
+      // Return the authenticated user
+      return true;
   }
 }
