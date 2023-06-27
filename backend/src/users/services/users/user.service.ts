@@ -63,6 +63,16 @@ export class UserService {
     if (user.picture) await this.pictureService.deletePicture(user.picture.id);
   }
 
+  async setToken(userId: number, oauthToken: string): Promise<void> {
+    const user = await this.getUser(userId);
+    await this.userRepository.update(user.id, { oauthToken });
+  }
+
+  async getToken(userId: number): Promise<any> {
+    const user = await this.getUser(userId);
+    return user.oauthToken;
+  }
+
   async getMatches(userId: number): Promise<Match[]> {
     const user = await this.getUser(userId, ["won", "lost"]);
 
@@ -78,5 +88,20 @@ export class UserService {
     if (user.status == status) return;
 
     await this.userRepository.update(user.id, { status });
+  }
+
+  async setUserName(userId: number, username: string): Promise<void> {
+    const user = await this.getUser(userId);
+    await this.userRepository.update(user.id, { username });
+  }
+
+  async getUserName(userId: number): Promise<any> {
+    const user = await this.getUser(userId);
+    return user.username;
+  }
+
+  async getEmail(userId: number): Promise<any> {
+    const user = await this.getUser(userId);
+    return user.email;
   }
 }

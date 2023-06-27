@@ -53,9 +53,26 @@ export class UsersController {
   getMatches(@Param("id", ParseIntPipe) userid: number): Promise<Match[]> {
     return this.userService.getMatches(userid);
   }
+
   @Post("create")
   @UsePipes(ValidationPipe)
   createUsers(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
+
+  @Get("/:id/email")
+  getEmail(@Param("id", ParseIntPipe) id: number): Promise<any> {
+    return this.userService.getEmail(id);
+  }
+
+  @Get("/:id/userName")
+  getUserName(@Param("id", ParseIntPipe) id: number): Promise<any> {
+    return this.userService.getUserName(id);
+  }
+
+  @Post("userName")
+  setUserName(@Param("id", ParseIntPipe) id: number, @Param("userName", ParseIntPipe) userName: string)
+  {
+    this.userService.setUserName(id, userName);
+  } 
 }
