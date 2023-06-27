@@ -9,10 +9,10 @@ export class CreateUserDto {
   @ApiProperty()
   username: string;
 
-  @IsNotEmpty()
-  @MinLength(8)
-  @ApiProperty()
-  password: string;
+  //@IsNotEmpty()
+  //@MinLength(8)
+  //@ApiProperty()
+  //password: string;
 
   @IsNotEmpty()
   @IsEmail()

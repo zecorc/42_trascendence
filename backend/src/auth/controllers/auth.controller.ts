@@ -62,6 +62,7 @@ export class AuthController {
         const existingUser = await this.usersService.getUserByEmail(user.email);
 
         if (existingUser) {
+
           return response.redirect("/dashboard"); // ??
         } else {
           const createUserDto: CreateUserDto = {
@@ -69,7 +70,7 @@ export class AuthController {
             picture: undefined,
             email: user.email,
             username: user.login,
-            password: "",
+            //password: "",
             rank: 0,
             status: 0
           };

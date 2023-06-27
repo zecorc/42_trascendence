@@ -39,11 +39,11 @@ export class User {
   })
   email: string;
 
-  @ApiProperty()
-  @Column({
-    nullable: false,
-  })
-  password: string;
+  //@ApiProperty()
+  //@Column({
+  //  nullable: false,
+  //})
+  //password: string;
 
   @ApiProperty()
   @Column({ default: UserStatus.OFFLINE })
