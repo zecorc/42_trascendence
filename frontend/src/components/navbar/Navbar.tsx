@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <div className={styles.container}>
       <div className={styles.profile}>
-      <Link href="/" className={styles.logo}>
+      <Link href="./profile" className={styles.logo}>
         PROFILE
       </Link>
       </div>

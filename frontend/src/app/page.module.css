@@ -34,7 +34,7 @@
 .title {
     background: linear-gradient(to bottom, #e00f0f, #43cf31);
     font-size: 72px;
-    -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 
 }
